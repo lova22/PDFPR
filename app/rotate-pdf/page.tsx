@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function RotatePdfPage() {
   return (
-    <div className="section-container" style={{ paddingTop: "3rem", paddingBottom: "6rem" }}>
+    <div className="container mx-auto max-w-7xl px-4 md:px-8 pt-32 pb-20 min-h-screen">
       
       <div className="rotate-ad-layout">
         

@@ -21,6 +21,7 @@ import {
   SquareCheck,
   Square,
   ChevronDown,
+  Loader2,
 } from "lucide-react";
 
 // ─── PDF.js CDN version ───────────────────────────────────────────────────────
@@ -260,26 +261,21 @@ export default function SplitPdfClient() {
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div style={{ width: "100%" }}>
+    <div className="w-full">
       {/* Header */}
-      <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-        <div aria-hidden="true" style={{
-          display: "inline-flex", alignItems: "center", justifyContent: "center",
-          width: 64, height: 64, borderRadius: 18, marginBottom: "1.25rem",
-          background: "linear-gradient(135deg, rgba(251,113,133,0.3), rgba(251,113,133,0.1))",
-          border: "1px solid rgba(251,113,133,0.3)",
-        }}>
-          <Scissors size={30} color="#fb7185" strokeWidth={1.75} />
+      <div className="text-center mb-10">
+        <div className="bg-rose-100 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-rose-200">
+          <Scissors className="w-8 h-8 text-rose-500" />
         </div>
-        <h1 style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)", fontWeight: 900, letterSpacing: "-0.03em", color: "var(--text-primary)", marginBottom: "0.75rem" }}>
+        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
           Split PDF
         </h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem", maxWidth: 480, margin: "0 auto", lineHeight: 1.6 }}>
+        <p className="text-gray-500 text-lg max-w-lg mx-auto leading-relaxed">
           Click pages to select them, then extract — all processing runs in your browser, nothing is uploaded.
         </p>
       </div>
 
-      <div style={{ maxWidth: 900, margin: "0 auto" }}>
+      <div className="max-w-4xl mx-auto">
         {/* Drop Zone */}
         {!file && (
           <div
@@ -313,15 +309,18 @@ export default function SplitPdfClient() {
 
         {/* Loading / Rendering progress */}
         {isRendering && (
-          <div role="status" aria-live="polite" style={{ marginTop: "1.5rem", padding: "2rem", borderRadius: 16, background: "rgba(251,113,133,0.06)", border: "1px solid rgba(251,113,133,0.15)", textAlign: "center" }}>
-            <p style={{ fontWeight: 600, color: "var(--text-primary)", marginBottom: "1rem", fontSize: "0.95rem" }}>
-              {status === "loading-script" ? "Loading PDF engine…" : "Rendering page thumbnails…"}
+          <div role="status" aria-live="polite" className="mt-6 p-8 rounded-2xl bg-rose-50 border border-rose-100 text-center">
+            <p className="font-semibold text-gray-900 mb-4 text-base">
+              {status === "loading-script" ? "Loading PDF engine..." : "Rendering page thumbnails..."}
             </p>
-            <div aria-hidden="true" style={{ height: 6, borderRadius: 3, background: "rgba(251,113,133,0.15)", overflow: "hidden", maxWidth: 320, margin: "0 auto" }}>
-              <div style={{ height: "100%", width: `${status === "loading-script" ? 10 : renderProgress}%`, background: "linear-gradient(90deg,#fb7185,#f43f5e)", borderRadius: 3, transition: "width 0.2s ease" }} />
+            <div aria-hidden="true" className="h-2 rounded-full bg-rose-100 overflow-hidden max-w-xs mx-auto">
+              <div 
+                className="h-full bg-gradient-to-r from-rose-400 to-rose-500 rounded-full transition-all duration-200 ease-out"
+                style={{ width: `${status === "loading-script" ? 10 : renderProgress}%` }}
+              />
             </div>
             {status === "rendering" && (
-              <p style={{ marginTop: "0.75rem", fontSize: "0.8rem", color: "var(--text-muted)" }}>{renderProgress}% complete</p>
+              <p className="mt-3 text-sm text-gray-500">{renderProgress}% complete</p>
             )}
           </div>
         )}
@@ -412,43 +411,44 @@ export default function SplitPdfClient() {
 
             {/* Processing banner */}
             {isProcessing && (
-              <div role="status" aria-live="polite" style={{ marginBottom: "1rem", padding: "1rem 1.25rem", borderRadius: 12, background: "rgba(251,113,133,0.06)", border: "1px solid rgba(251,113,133,0.15)", display: "flex", alignItems: "center", gap: 10, color: "#fb7185", fontWeight: 500, fontSize: "0.9rem" }}>
-                <span aria-hidden="true" style={{ display: "inline-block", width: 18, height: 18, borderRadius: "50%", border: "2px solid rgba(251,113,133,0.3)", borderTopColor: "#fb7185", animation: "spin 0.7s linear infinite", flexShrink: 0 }} />
-                Extracting selected pages…
+              <div role="status" aria-live="polite" className="mb-4 p-5 rounded-xl bg-rose-50 border border-rose-100 flex items-center gap-3 text-rose-600 font-medium text-sm">
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Extracting selected pages...
               </div>
             )}
 
             {/* Success */}
             {status === "done" && (
-              <div role="status" aria-live="polite" style={{ marginBottom: "1rem", padding: "1rem 1.25rem", borderRadius: 12, background: "rgba(34,211,238,0.08)", border: "1px solid rgba(34,211,238,0.25)", display: "flex", alignItems: "center", gap: 10, color: "#22d3ee", fontWeight: 500, fontSize: "0.9rem" }}>
-                <CheckCircle2 size={18} aria-hidden="true" />
+              <div role="status" aria-live="polite" className="mb-4 p-5 rounded-xl bg-cyan-50 border border-cyan-100 flex items-center gap-3 text-cyan-600 font-medium text-sm">
+                <CheckCircle2 className="w-5 h-5" aria-hidden="true" />
                 Your split PDF has been downloaded successfully!
               </div>
             )}
 
             {/* Error (post-thumbnail) */}
             {status === "error" && errorMsg && (
-              <div role="alert" style={{ marginBottom: "1rem", padding: "1rem 1.25rem", borderRadius: 12, background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.25)", display: "flex", alignItems: "flex-start", gap: 10, color: "var(--error)", fontSize: "0.875rem", lineHeight: 1.55 }}>
-                <AlertCircle size={18} style={{ flexShrink: 0, marginTop: 2 }} aria-hidden="true" />
+              <div role="alert" className="mb-4 p-5 rounded-xl bg-red-50 border border-red-100 flex items-start gap-3 text-red-600 text-sm leading-relaxed">
+                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <div><strong>Error:</strong> {errorMsg}</div>
               </div>
             )}
 
             {/* CTA */}
-            <div style={{ textAlign: "center" }}>
-              <button id="split-pdf-btn" type="button" className="btn-primary"
+            <div className="text-center mt-8">
+              <button id="split-pdf-btn" type="button" 
                 onClick={handleSplit} disabled={!canSplit} aria-disabled={!canSplit}
-                style={{ fontSize: "1.05rem", padding: "0.9rem 2.5rem", background: "linear-gradient(135deg,#fb7185,#f43f5e)", opacity: canSplit ? 1 : 0.45, cursor: canSplit ? "pointer" : "not-allowed", display: "inline-flex", alignItems: "center", gap: 10 }}>
+                className={`inline-flex justify-center items-center gap-3 w-full md:w-auto bg-rose-500 hover:bg-rose-600 text-white font-bold text-lg py-4 px-10 rounded-xl transition-all shadow-md ${!canSplit ? "opacity-50 cursor-not-allowed" : ""}`}
+              >
                 {isProcessing ? (
-                  <><span aria-hidden="true" style={{ display: "inline-block", width: 18, height: 18, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.3)", borderTopColor: "#fff", animation: "spin 0.7s linear infinite" }} /> Extracting…</>
+                  <><Loader2 className="w-5 h-5 animate-spin" /> Extracting...</>
                 ) : (
-                  <><Download size={18} aria-hidden="true" />
+                  <><Download className="w-5 h-5" aria-hidden="true" />
                     {effectiveSelected === 0 ? "Select Pages to Extract" : `Extract ${effectiveSelected} Page${effectiveSelected !== 1 ? "s" : ""}`}
                   </>
                 )}
               </button>
               {splitMode === "select" && effectiveSelected === 0 && (
-                <p style={{ marginTop: "0.75rem", fontSize: "0.8rem", color: "var(--text-muted)" }}>Click thumbnails above to select pages.</p>
+                <p className="mt-3 text-sm text-gray-500">Click thumbnails above to select pages.</p>
               )}
             </div>
           </>
@@ -456,8 +456,8 @@ export default function SplitPdfClient() {
 
         {/* Error before thumbnails (e.g. invalid file / CDN failed) */}
         {status === "error" && errorMsg && thumbnails.length === 0 && (
-          <div role="alert" style={{ marginTop: "1.5rem", padding: "1rem 1.25rem", borderRadius: 12, background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.25)", display: "flex", alignItems: "flex-start", gap: 10, color: "var(--error)", fontSize: "0.875rem", lineHeight: 1.55 }}>
-            <AlertCircle size={18} style={{ flexShrink: 0, marginTop: 2 }} aria-hidden="true" />
+          <div role="alert" className="mt-6 p-5 rounded-xl bg-red-50 border border-red-100 flex items-start gap-3 text-red-600 text-sm leading-relaxed">
+            <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div><strong>Error:</strong> {errorMsg}</div>
           </div>
         )}

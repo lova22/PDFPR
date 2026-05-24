@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, ArrowRight } from "lucide-react";
 
 interface ToolCardProps {
   id: string;
@@ -24,128 +24,47 @@ export default function ToolCard({
   badge,
   disabled = false,
 }: ToolCardProps) {
-  const CardContent = (
+  return (
+    <Link id={id} href={href} className="no-underline block h-full">
       <article
-        className="glass-card animate-slide-up"
-        style={{
-          padding: "1.75rem",
-          cursor: disabled ? "not-allowed" : "pointer",
-          height: "100%",
-          position: "relative",
-          overflow: "hidden",
-          opacity: disabled ? 0.7 : 1,
-        }}
+        className={`bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center p-6 sm:p-8 h-full relative group ${
+          disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+        }`}
       >
-        {/* Subtle top-edge highlight */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "1px",
-            background:
-              "linear-gradient(90deg, transparent, rgba(99,102,241,0.4), transparent)",
-          }}
-        />
-
-        {/* Badge */}
-        {badge && (
-          <span
-            style={{
-              position: "absolute",
-              top: "1rem",
-              right: "1rem",
-              background: disabled ? "rgba(255,255,255,0.05)" : "rgba(99,102,241,0.2)",
-              color: disabled ? "var(--text-muted)" : "#a5b4fc",
-              fontSize: "0.65rem",
-              fontWeight: 700,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              padding: "2px 8px",
-              borderRadius: "20px",
-              border: disabled ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(99,102,241,0.3)",
-            }}
+        {/* Centered Icon Container */}
+        <div className="mb-5 flex justify-center w-full">
+          <div 
+            className="w-14 h-14 rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-110" 
+            style={{ backgroundColor: `${iconBg}20` }}
           >
-            {badge}
-          </span>
-        )}
-
-        {/* Icon */}
-        <div
-          aria-hidden="true"
-          className="tool-card-icon"
-          style={{
-            width: 52,
-            height: 52,
-            borderRadius: 14,
-            background: disabled ? "rgba(255,255,255,0.03)" : iconBg,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: "1.25rem",
-          }}
-        >
-          <Icon size={26} color={disabled ? "var(--text-muted)" : iconColor} strokeWidth={1.75} />
+            <Icon className="w-7 h-7" style={{ color: iconColor }} />
+          </div>
+        </div>
+        
+        {/* Text Container */}
+        <div className="flex flex-col flex-grow items-center w-full">
+          <div className="flex flex-col items-center gap-2 mb-3">
+            <h3 className="text-xl font-bold text-gray-900 group-hover:text-rose-600 transition-colors">
+              {title}
+            </h3>
+            {badge && (
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-rose-100 text-rose-700">
+                {badge}
+              </span>
+            )}
+          </div>
+          
+          <p className="text-sm text-gray-500 leading-relaxed max-w-[250px]">
+            {subtitle}
+          </p>
         </div>
 
-        {/* Text */}
-        <h3
-          style={{
-            fontSize: "1.05rem",
-            fontWeight: 700,
-            color: disabled ? "var(--text-muted)" : "var(--text-primary)",
-            marginBottom: "0.5rem",
-            letterSpacing: "-0.01em",
-          }}
-        >
-          {title}
-        </h3>
-        <p
-          style={{
-            fontSize: "0.82rem",
-            color: "var(--text-secondary)",
-            lineHeight: 1.55,
-          }}
-        >
-          {subtitle}
-        </p>
-
-        {/* Arrow indicator */}
-        <div
-          aria-hidden="true"
-          style={{
-            marginTop: "1.25rem",
-            fontSize: "0.8rem",
-            color: disabled ? "var(--text-muted)" : iconColor,
-            fontWeight: 600,
-            display: "flex",
-            alignItems: "center",
-            gap: "4px",
-            opacity: disabled ? 0.5 : 0.8,
-          }}
-        >
-          {disabled ? "Coming Soon" : <>Use Tool <span style={{ fontSize: "1rem" }}>→</span></>}
+        {/* Hover Action */}
+        <div className="mt-6 flex items-center justify-center gap-1.5 text-sm font-semibold text-rose-600 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+          <span>Use Tool</span>
+          <ArrowRight className="w-4 h-4" />
         </div>
       </article>
-  );
-
-  if (disabled) {
-    return <div id={id} style={{ display: "block" }}>{CardContent}</div>;
-  }
-
-  return (
-    <Link
-      id={id}
-      href={href}
-      aria-label={`${title} — ${subtitle}`}
-      style={{
-        textDecoration: "none",
-        display: "block",
-      }}
-    >
-      {CardContent}
     </Link>
   );
 }

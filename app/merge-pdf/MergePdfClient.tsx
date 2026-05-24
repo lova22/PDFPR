@@ -10,7 +10,7 @@
  */
 
 import { useState, useCallback } from "react";
-import { FilePlus2, Download, Trash2, AlertCircle, CheckCircle2, GripVertical } from "lucide-react";
+import { FilePlus2, Download, Trash2, AlertCircle, CheckCircle2, GripVertical, Loader2 } from "lucide-react";
 import DropZone from "@/components/ui/DropZone";
 import ProgressBar from "@/components/ui/ProgressBar";
 import { mergePdfs, type MergeProgressEvent } from "@/lib/pdf/merge";
@@ -86,53 +86,22 @@ export default function MergePdfClient() {
   const totalSizeMb = (totalSize / 1024 / 1024).toFixed(2);
 
   return (
-    <div className="section-container" style={{ paddingTop: "3rem", paddingBottom: "6rem" }}>
-
-      {/* ── Page Header ── */}
-      <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-        <div
-          aria-hidden="true"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 64,
-            height: 64,
-            borderRadius: 18,
-            background: "linear-gradient(135deg, rgba(99,102,241,0.3), rgba(99,102,241,0.1))",
-            border: "1px solid rgba(99,102,241,0.3)",
-            marginBottom: "1.25rem",
-          }}
-        >
-          <FilePlus2 size={30} color="#818cf8" strokeWidth={1.75} />
+    <div className="container mx-auto max-w-7xl px-4 md:px-8 pt-32 pb-20 min-h-screen">
+      <div className="text-center mb-16 relative">
+        <div className="bg-indigo-100 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <FilePlus2 className="w-10 h-10 text-indigo-600" />
         </div>
-        <h1
-          style={{
-            fontSize: "clamp(2rem, 4vw, 2.75rem)",
-            fontWeight: 900,
-            letterSpacing: "-0.03em",
-            color: "var(--text-primary)",
-            marginBottom: "0.75rem",
-          }}
-        >
+        <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
           Merge PDF
         </h1>
-        <p
-          style={{
-            color: "var(--text-secondary)",
-            fontSize: "1.05rem",
-            maxWidth: "480px",
-            margin: "0 auto",
-            lineHeight: 1.6,
-          }}
-        >
+        <p className="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
           Combine multiple PDFs into one document — in any order you choose.
-          Processing happens entirely in your browser.
+          Processing happens entirely in your browser securely.
         </p>
       </div>
 
       {/* ── Main Workspace ── */}
-      <div style={{ maxWidth: 720, margin: "0 auto" }}>
+      <div className="max-w-3xl mx-auto">
 
         {/* Drop Zone */}
         <DropZone
@@ -144,74 +113,35 @@ export default function MergePdfClient() {
 
         {/* File count + total size summary */}
         {files.length > 0 && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginTop: "1.25rem",
-              padding: "0.75rem 1rem",
-              borderRadius: "10px",
-              background: "rgba(99,102,241,0.06)",
-              border: "1px solid rgba(99,102,241,0.12)",
-            }}
-          >
-            <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
-              <strong style={{ color: "var(--text-primary)" }}>{files.length}</strong>{" "}
+          <div className="flex justify-between items-center mt-6 p-4 rounded-xl bg-indigo-50 border border-indigo-100">
+            <span className="text-sm text-gray-600 font-medium">
+              <strong className="text-gray-900">{files.length}</strong>{" "}
               file{files.length !== 1 ? "s" : ""} selected &nbsp;·&nbsp;{" "}
-              <strong style={{ color: "var(--text-primary)" }}>{totalSizeMb} MB</strong> total
+              <strong className="text-gray-900">{totalSizeMb} MB</strong> total
             </span>
             <button
               id="clear-all-btn"
               type="button"
               onClick={handleClearAll}
               aria-label="Clear all files"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                background: "none",
-                border: "none",
-                color: "var(--text-muted)",
-                fontSize: "0.8rem",
-                cursor: "pointer",
-                fontWeight: 500,
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--error)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+              className="flex items-center gap-2 text-gray-500 hover:text-red-600 text-sm font-medium transition-colors"
             >
-              <Trash2 size={13} /> Clear All
+              <Trash2 className="w-4 h-4" /> Clear All
             </button>
           </div>
         )}
 
         {/* Ordering hint */}
         {files.length >= 2 && status === "idle" && (
-          <p
-            style={{
-              marginTop: "0.75rem",
-              fontSize: "0.78rem",
-              color: "var(--text-muted)",
-              textAlign: "center",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "6px",
-            }}
-          >
-            <GripVertical size={13} aria-hidden="true" />
+          <p className="mt-4 text-sm text-gray-500 text-center flex items-center justify-center gap-2 font-medium">
+            <GripVertical className="w-4 h-4" aria-hidden="true" />
             PDFs will be merged in the order listed above.
           </p>
         )}
 
         {/* Progress bar */}
         {status === "processing" && (
-          <div
-            role="status"
-            aria-live="polite"
-            style={{ marginTop: "1.75rem" }}
-          >
+          <div role="status" aria-live="polite" className="mt-8">
             <ProgressBar value={progress} label={progressLabel} />
           </div>
         )}
@@ -221,21 +151,9 @@ export default function MergePdfClient() {
           <div
             role="status"
             aria-live="polite"
-            style={{
-              marginTop: "1.5rem",
-              padding: "1rem 1.25rem",
-              borderRadius: "12px",
-              background: "rgba(34,211,238,0.08)",
-              border: "1px solid rgba(34,211,238,0.25)",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              color: "#22d3ee",
-              fontWeight: 500,
-              fontSize: "0.9rem",
-            }}
+            className="mt-8 p-6 rounded-xl bg-green-50 border border-green-200 flex items-center gap-4 text-green-700 font-medium"
           >
-            <CheckCircle2 size={18} aria-hidden="true" />
+            <CheckCircle2 className="w-6 h-6 flex-shrink-0" aria-hidden="true" />
             Your merged PDF has been downloaded successfully!
           </div>
         )}
@@ -244,21 +162,9 @@ export default function MergePdfClient() {
         {status === "error" && errorMsg && (
           <div
             role="alert"
-            style={{
-              marginTop: "1.5rem",
-              padding: "1rem 1.25rem",
-              borderRadius: "12px",
-              background: "rgba(248,113,113,0.08)",
-              border: "1px solid rgba(248,113,113,0.25)",
-              display: "flex",
-              alignItems: "flex-start",
-              gap: "10px",
-              color: "var(--error)",
-              fontSize: "0.875rem",
-              lineHeight: 1.55,
-            }}
+            className="mt-8 p-6 rounded-xl bg-red-50 border border-red-200 flex items-start gap-4 text-red-700 text-sm"
           >
-            <AlertCircle size={18} style={{ flexShrink: 0, marginTop: 2 }} aria-hidden="true" />
+            <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <strong>Merge failed:</strong> {errorMsg}
             </div>
@@ -266,11 +172,10 @@ export default function MergePdfClient() {
         )}
 
         {/* Merge CTA */}
-        <div style={{ marginTop: "2rem", textAlign: "center" }}>
+        <div className="mt-10 text-center">
           <button
             id="merge-pdf-btn"
             type="button"
-            className="btn-primary"
             onClick={handleMerge}
             disabled={!canMerge}
             aria-disabled={!canMerge}
@@ -279,48 +184,22 @@ export default function MergePdfClient() {
                 ? "Add at least 2 PDF files to merge"
                 : `Merge ${files.length} PDFs`
             }
-            style={{
-              fontSize: "1.05rem",
-              padding: "0.9rem 2.5rem",
-              opacity: canMerge ? 1 : 0.45,
-              cursor: canMerge ? "pointer" : "not-allowed",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
+            className={`inline-flex justify-center items-center gap-3 w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg py-4 px-10 rounded-xl transition-all shadow-md ${!canMerge ? "opacity-50 cursor-not-allowed" : ""}`}
           >
             {status === "processing" ? (
               <>
-                <span
-                  aria-hidden="true"
-                  style={{
-                    display: "inline-block",
-                    width: 18,
-                    height: 18,
-                    borderRadius: "50%",
-                    border: "2px solid rgba(255,255,255,0.3)",
-                    borderTopColor: "#fff",
-                    animation: "spin 0.7s linear infinite",
-                  }}
-                />
-                Merging…
+                <Loader2 className="w-6 h-6 animate-spin" />
+                Merging...
               </>
             ) : (
               <>
-                <Download size={18} aria-hidden="true" />
-                {files.length < 2 ? "Add 2+ PDFs to Merge" : `Merge ${files.length} PDFs`}
+                <FilePlus2 className="w-6 h-6" aria-hidden="true" />
+                Merge PDFs
               </>
             )}
           </button>
-
           {files.length < 2 && (
-            <p
-              style={{
-                marginTop: "0.75rem",
-                fontSize: "0.8rem",
-                color: "var(--text-muted)",
-              }}
-            >
+            <p className="mt-3 text-sm text-gray-400">
               Add at least 2 PDF files to enable merging.
             </p>
           )}

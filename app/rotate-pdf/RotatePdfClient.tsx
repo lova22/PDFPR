@@ -20,6 +20,7 @@ import {
   LayoutGrid,
   RotateCw,
   RotateCcw,
+  Loader2,
 } from "lucide-react";
 
 // ─── PDF.js CDN version ───────────────────────────────────────────────────────
@@ -276,26 +277,21 @@ export default function RotatePdfClient() {
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div style={{ width: "100%" }}>
+    <div className="w-full">
       {/* Header */}
-      <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-        <div aria-hidden="true" style={{
-          display: "inline-flex", alignItems: "center", justifyContent: "center",
-          width: 64, height: 64, borderRadius: 18, marginBottom: "1.25rem",
-          background: "linear-gradient(135deg, rgba(34,197,94,0.3), rgba(34,197,94,0.1))",
-          border: "1px solid rgba(34,197,94,0.3)",
-        }}>
-          <RefreshCw size={30} color="#22c55e" strokeWidth={1.75} />
+      <div className="text-center mb-10">
+        <div className="bg-green-100 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-green-200">
+          <RefreshCw className="w-8 h-8 text-green-600" />
         </div>
-        <h1 style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)", fontWeight: 900, letterSpacing: "-0.03em", color: "var(--text-primary)", marginBottom: "0.75rem" }}>
+        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
           Rotate PDF
         </h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem", maxWidth: 480, margin: "0 auto", lineHeight: 1.6 }}>
+        <p className="text-gray-500 text-lg max-w-lg mx-auto leading-relaxed">
           Rotate individual pages or all pages at once — all processing runs in your browser securely.
         </p>
       </div>
 
-      <div style={{ maxWidth: 900, margin: "0 auto" }}>
+      <div className="max-w-4xl mx-auto">
         {/* Drop Zone */}
         {!file && (
           <div
@@ -328,15 +324,18 @@ export default function RotatePdfClient() {
 
         {/* Loading / Rendering progress */}
         {isRendering && (
-          <div role="status" aria-live="polite" style={{ marginTop: "1.5rem", padding: "2rem", borderRadius: 16, background: "rgba(34,197,94,0.06)", border: "1px solid rgba(34,197,94,0.15)", textAlign: "center" }}>
-            <p style={{ fontWeight: 600, color: "var(--text-primary)", marginBottom: "1rem", fontSize: "0.95rem" }}>
-              {status === "loading-script" ? "Loading PDF engine…" : "Rendering page thumbnails…"}
+          <div role="status" aria-live="polite" className="mt-6 p-8 rounded-2xl bg-green-50 border border-green-100 text-center">
+            <p className="font-semibold text-gray-900 mb-4 text-base">
+              {status === "loading-script" ? "Loading PDF engine..." : "Rendering page thumbnails..."}
             </p>
-            <div aria-hidden="true" style={{ height: 6, borderRadius: 3, background: "rgba(34,197,94,0.15)", overflow: "hidden", maxWidth: 320, margin: "0 auto" }}>
-              <div style={{ height: "100%", width: `${status === "loading-script" ? 10 : renderProgress}%`, background: "linear-gradient(90deg,#4ade80,#22c55e)", borderRadius: 3, transition: "width 0.2s ease" }} />
+            <div aria-hidden="true" className="h-2 rounded-full bg-green-100 overflow-hidden max-w-xs mx-auto">
+              <div 
+                className="h-full bg-gradient-to-r from-green-400 to-green-500 rounded-full transition-all duration-200 ease-out"
+                style={{ width: `${status === "loading-script" ? 10 : renderProgress}%` }}
+              />
             </div>
             {status === "rendering" && (
-              <p style={{ marginTop: "0.75rem", fontSize: "0.8rem", color: "var(--text-muted)" }}>{renderProgress}% complete</p>
+              <p className="mt-3 text-sm text-gray-500">{renderProgress}% complete</p>
             )}
           </div>
         )}
@@ -449,37 +448,38 @@ export default function RotatePdfClient() {
 
             {/* Processing banner */}
             {isProcessing && (
-              <div role="status" aria-live="polite" style={{ marginBottom: "1rem", padding: "1rem 1.25rem", borderRadius: 12, background: "rgba(34,197,94,0.06)", border: "1px solid rgba(34,197,94,0.15)", display: "flex", alignItems: "center", gap: 10, color: "#22c55e", fontWeight: 500, fontSize: "0.9rem" }}>
-                <span aria-hidden="true" style={{ display: "inline-block", width: 18, height: 18, borderRadius: "50%", border: "2px solid rgba(34,197,94,0.3)", borderTopColor: "#22c55e", animation: "spin 0.7s linear infinite", flexShrink: 0 }} />
-                Applying rotations…
+              <div role="status" aria-live="polite" className="mb-4 p-5 rounded-xl bg-green-50 border border-green-100 flex items-center gap-3 text-green-700 font-medium text-sm">
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Applying rotations...
               </div>
             )}
 
             {/* Success */}
             {status === "done" && (
-              <div role="status" aria-live="polite" style={{ marginBottom: "1rem", padding: "1rem 1.25rem", borderRadius: 12, background: "rgba(34,211,238,0.08)", border: "1px solid rgba(34,211,238,0.25)", display: "flex", alignItems: "center", gap: 10, color: "#22d3ee", fontWeight: 500, fontSize: "0.9rem" }}>
-                <CheckCircle2 size={18} aria-hidden="true" />
+              <div role="status" aria-live="polite" className="mb-4 p-5 rounded-xl bg-cyan-50 border border-cyan-100 flex items-center gap-3 text-cyan-700 font-medium text-sm">
+                <CheckCircle2 className="w-5 h-5" aria-hidden="true" />
                 Your rotated PDF has been downloaded successfully!
               </div>
             )}
 
             {/* Error (post-thumbnail) */}
             {status === "error" && errorMsg && (
-              <div role="alert" style={{ marginBottom: "1rem", padding: "1rem 1.25rem", borderRadius: 12, background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.25)", display: "flex", alignItems: "flex-start", gap: 10, color: "var(--error)", fontSize: "0.875rem", lineHeight: 1.55 }}>
-                <AlertCircle size={18} style={{ flexShrink: 0, marginTop: 2 }} aria-hidden="true" />
+              <div role="alert" className="mb-4 p-5 rounded-xl bg-red-50 border border-red-100 flex items-start gap-3 text-red-600 text-sm leading-relaxed">
+                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <div><strong>Error:</strong> {errorMsg}</div>
               </div>
             )}
 
             {/* CTA */}
-            <div style={{ textAlign: "center" }}>
-              <button type="button" className="btn-primary"
+            <div className="text-center mt-8">
+              <button type="button" 
                 onClick={handleApply} disabled={!canApply} aria-disabled={!canApply}
-                style={{ fontSize: "1.05rem", padding: "0.9rem 2.5rem", background: "linear-gradient(135deg,#4ade80,#16a34a)", opacity: canApply ? 1 : 0.45, cursor: canApply ? "pointer" : "not-allowed", display: "inline-flex", alignItems: "center", gap: 10 }}>
+                className={`inline-flex justify-center items-center gap-3 w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 px-10 rounded-xl transition-all shadow-md ${!canApply ? "opacity-50 cursor-not-allowed" : ""}`}
+              >
                 {isProcessing ? (
-                  <><span aria-hidden="true" style={{ display: "inline-block", width: 18, height: 18, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.3)", borderTopColor: "#fff", animation: "spin 0.7s linear infinite" }} /> Applying…</>
+                  <><Loader2 className="w-5 h-5 animate-spin" /> Applying...</>
                 ) : (
-                  <><Download size={18} aria-hidden="true" /> Apply & Download</>
+                  <><Download className="w-5 h-5" aria-hidden="true" /> Apply & Download</>
                 )}
               </button>
             </div>
@@ -488,8 +488,8 @@ export default function RotatePdfClient() {
 
         {/* Error before thumbnails */}
         {status === "error" && errorMsg && thumbnails.length === 0 && (
-          <div role="alert" style={{ marginTop: "1.5rem", padding: "1rem 1.25rem", borderRadius: 12, background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.25)", display: "flex", alignItems: "flex-start", gap: 10, color: "var(--error)", fontSize: "0.875rem", lineHeight: 1.55 }}>
-            <AlertCircle size={18} style={{ flexShrink: 0, marginTop: 2 }} aria-hidden="true" />
+          <div role="alert" className="mt-6 p-5 rounded-xl bg-red-50 border border-red-100 flex items-start gap-3 text-red-600 text-sm leading-relaxed">
+            <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div><strong>Error:</strong> {errorMsg}</div>
           </div>
         )}
