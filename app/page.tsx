@@ -26,7 +26,8 @@ import {
   Wrench,
   FormInput,
   Hash,
-  Edit3
+  Edit3,
+  FileText
 } from "lucide-react";
 import ToolCard from "@/components/ui/ToolCard";
 
@@ -235,6 +236,15 @@ const tools = [
     iconBg: "#ec4899",
     title: "Online PDF Editor",
     subtitle: "The easiest way to edit PDF text and elements securely online.",
+  },
+  {
+    id: "tool-rich-pdf-editor",
+    href: "/rich-pdf-editor",
+    icon: FileText,
+    iconColor: "#4f46e5",
+    iconBg: "#4f46e5",
+    title: "Rich PDF Editor",
+    subtitle: "Convert PDF to a flowable format to edit fonts and styles like Google Docs.",
   },
   {
     id: "tool-organize-pdf",

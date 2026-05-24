@@ -12,6 +12,7 @@ import { protectPdf } from './services/protect';
 import { unlockPdf } from './services/unlock';
 import { convertPdfToExcel } from './services/pdf2excel';
 import { convertPdfToPowerpoint } from './services/pdf2powerpoint';
+import { convertHtmlToPdf } from './services/html2pdf';
 
 dotenv.config();
 
@@ -52,7 +53,7 @@ const worker = new Worker('pdf-heavy-jobs', async (job: Job) => {
   console.log(`\n[WORKER] Received job [${job.id}] of type [${job.name}]`);
   console.log(`[WORKER] Job Data:`, job.data);
   
-  if (!['compress-pdf', 'word-to-pdf', 'pdf-to-word', 'protect-pdf', 'unlock-pdf', 'excel-to-pdf', 'powerpoint-to-pdf', 'pdf-to-excel', 'pdf-to-powerpoint', 'repair-pdf'].includes(job.name)) {
+  if (!['compress-pdf', 'word-to-pdf', 'pdf-to-word', 'protect-pdf', 'unlock-pdf', 'excel-to-pdf', 'powerpoint-to-pdf', 'pdf-to-excel', 'pdf-to-powerpoint', 'repair-pdf', 'html-to-pdf'].includes(job.name)) {
     throw new Error(`Unknown job type: ${job.name}`);
   }
 
@@ -124,6 +125,12 @@ const worker = new Worker('pdf-heavy-jobs', async (job: Job) => {
       await repairPdf(localInputPath, localOutputPath);
       console.log(`[WORKER] Repair complete.`);
       resultFilePath = localOutputPath;
+    } else if (job.name === 'html-to-pdf') {
+      console.log(`[WORKER] Running HTML to PDF conversion...`);
+      const htmlInputPath = path.join(tmpDir, 'input.html');
+      fs.renameSync(localInputPath, htmlInputPath);
+      resultFilePath = await convertHtmlToPdf(htmlInputPath, tmpDir);
+      console.log(`[WORKER] Conversion complete. Output: ${resultFilePath}`);
     }
     
     // Step C: Upload
