@@ -5,7 +5,7 @@ import { FileText, Loader2, Download, AlertCircle, RefreshCw, CheckCircle2, Save
 import { useDropzone } from "react-dropzone";
 import { motion, AnimatePresence } from "framer-motion";
 import { createClient } from "@supabase/supabase-js";
-import { queuePdfToWordJob } from "@/app/actions/queuePdfToWordJob";
+import { queuePdfToWordJob } from "@/app/actions/pdfToWord";
 import { queueHtmlToPdfJob } from "@/app/actions/queueHtmlToPdfJob";
 import dynamic from "next/dynamic";
 import mammoth from "mammoth";
@@ -53,7 +53,7 @@ export default function RichPdfEditorClient() {
 
       // 3. Queue PDF to Word Job
       setStatus("converting-word");
-      const { jobId, success, error: queueError } = await queuePdfToWordJob(user.id, selectedFile.name, publicUrl);
+      const { jobId, success, error: queueError } = await queuePdfToWordJob(storagePath, selectedFile.size);
       if (!success) throw new Error(queueError);
 
       // 4. Poll for Word completion
