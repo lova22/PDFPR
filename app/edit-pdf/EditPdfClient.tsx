@@ -267,7 +267,7 @@ export default function EditPdfClient() {
       }
 
       const newPdfBytes = await pdf.save();
-      const blob = new Blob([newPdfBytes], { type: "application/pdf" });
+      const blob = new Blob([newPdfBytes as BlobPart], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       setDownloadUrl(url);
       setStatus("completed");
