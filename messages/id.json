@@ -1,0 +1,36 @@
+{
+  "Navbar": {
+    "allTools": "Semua Alat",
+    "github": "GitHub"
+  },
+  "Hero": {
+    "title": "Alat PDF Kuat di Browser Anda",
+    "subtitle": "Edit, konversi, gabungkan, dan pisahkan file PDF Anda dengan aman tanpa mengunggah data ke server."
+  },
+  "Tools": {
+    "compress": {
+      "title": "Kompres PDF",
+      "desc": "Kurangi ukuran file dengan mempertahankan kualitas."
+    },
+    "wordToPdf": {
+      "title": "Word ke PDF",
+      "desc": "Konversi dokumen Word ke PDF."
+    },
+    "merge": {
+      "title": "Gabungkan PDF",
+      "desc": "Gabungkan beberapa PDF menjadi satu."
+    },
+    "split": {
+      "title": "Pisahkan PDF",
+      "desc": "Ekstrak halaman dari PDF Anda."
+    },
+    "rotate": {
+      "title": "Putar PDF",
+      "desc": "Putar halaman PDF Anda."
+    }
+  },
+  "Seo": {
+    "title": "PDFPro - Alat PDF Lanjutan",
+    "description": "Rangkaian komprehensif alat manipulasi PDF."
+  }
+}

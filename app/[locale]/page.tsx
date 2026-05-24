@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/src/i18n/routing";
+import { useTranslations } from "next-intl";
 import {
   FilePlus2,
   Scissors,
@@ -258,6 +259,8 @@ const tools = [
 ];
 
 export default function HomePage() {
+  const t = useTranslations("Hero");
+
   return (
     <>
       {/* ================================================================
@@ -266,15 +269,11 @@ export default function HomePage() {
       <section className="pt-32 pb-20 text-center relative bg-white border-b border-gray-200">
         <div className="container mx-auto max-w-7xl px-4 md:px-8 relative z-10">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-tight max-w-4xl mx-auto mb-6">
-            Every tool you need to work with{" "}
-            <span className="text-rose-600">PDFs</span>
-            <br />
-            in one place.
+            {t("title")}
           </h1>
 
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Compress, merge, convert, edit, and secure your PDF files in seconds. 
-            All tools are 100% free and easy to use.
+            {t("subtitle")}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">

@@ -1,7 +1,11 @@
-import Link from "next/link";
+import { Link } from "@/src/i18n/routing";
 import { FileDown } from "lucide-react";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslations } from "next-intl";
 
 export default function Navbar() {
+  const t = useTranslations("Navbar");
+
   return (
     <header className="fixed top-0 w-full z-50 bg-white border-b border-gray-200 shadow-sm transition-all">
       <div className="container mx-auto max-w-7xl px-4 md:px-8 flex items-center justify-between h-20">
@@ -17,11 +21,12 @@ export default function Navbar() {
 
         <nav className="flex gap-4 md:gap-8 items-center">
           <Link href="/#tools" className="font-medium text-xs md:text-sm text-gray-600 hover:text-rose-600 transition-colors">
-            All Tools
+            {t("allTools")}
           </Link>
           <a href="https://github.com" target="_blank" rel="noreferrer" className="font-medium text-xs md:text-sm text-gray-600 hover:text-rose-600 transition-colors">
-            GitHub
+            {t("github")}
           </a>
+          <LanguageSwitcher />
         </nav>
 
       </div>

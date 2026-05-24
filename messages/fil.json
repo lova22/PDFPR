@@ -1,0 +1,36 @@
+{
+  "Navbar": {
+    "allTools": "Lahat ng Tools",
+    "github": "GitHub"
+  },
+  "Hero": {
+    "title": "Mabisang PDF Tools sa Iyong Browser",
+    "subtitle": "I-edit, i-convert, i-merge, at i-split ang iyong mga PDF file nang ligtas nang walang ina-upload sa mga server."
+  },
+  "Tools": {
+    "compress": {
+      "title": "I-compress ang PDF",
+      "desc": "Paliitin ang laki ng file habang pinapanatili ang kalidad."
+    },
+    "wordToPdf": {
+      "title": "Word patungong PDF",
+      "desc": "I-convert ang mga Word document patungong PDF."
+    },
+    "merge": {
+      "title": "I-merge ang PDF",
+      "desc": "Pagsamahin ang maraming PDF sa isa."
+    },
+    "split": {
+      "title": "I-split ang PDF",
+      "desc": "Kumuha ng mga pahina mula sa iyong PDF."
+    },
+    "rotate": {
+      "title": "I-rotate ang PDF",
+      "desc": "I-rotate ang iyong mga pahina ng PDF."
+    }
+  },
+  "Seo": {
+    "title": "PDFPro - Mga Advanced na PDF Tool",
+    "description": "Isang komprehensibong hanay ng mga tool para sa PDF."
+  }
+}

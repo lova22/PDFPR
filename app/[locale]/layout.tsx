@@ -7,9 +7,13 @@
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Navbar from "@/components/ui/Navbar";
 import AuthProvider from "@/components/auth/AuthProvider";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { routing } from "@/src/i18n/routing";
+import { notFound } from "next/navigation";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,18 +49,30 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+
+  const messages = await getMessages();
+  const dir = locale === "ar" ? "rtl" : "ltr";
+
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang={locale} dir={dir} className={inter.variable} suppressHydrationWarning>
       <body className="antialiased text-gray-900 bg-gray-50">
-        <AuthProvider>
-          <Navbar />
-          <main className="relative z-10">{children}</main>
-        </AuthProvider>
+        <NextIntlClientProvider messages={messages}>
+          <AuthProvider>
+            <Navbar />
+            <main className="relative z-10">{children}</main>
+          </AuthProvider>
+        </NextIntlClientProvider>
 
         {/* Ambient background orbs — pure CSS, zero JS overhead */}
         <div aria-hidden="true" className="fixed inset-0 z-0 overflow-hidden pointer-events-none">

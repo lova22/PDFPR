@@ -1,0 +1,36 @@
+{
+  "Navbar": {
+    "allTools": "Tutti gli Strumenti",
+    "github": "GitHub"
+  },
+  "Hero": {
+    "title": "Potenti Strumenti PDF nel Tuo Browser",
+    "subtitle": "Modifica, converti, unisci e dividi i tuoi file PDF in modo sicuro senza caricare dati sui server."
+  },
+  "Tools": {
+    "compress": {
+      "title": "Comprimi PDF",
+      "desc": "Riduci le dimensioni del file mantenendo la qualità."
+    },
+    "wordToPdf": {
+      "title": "Da Word a PDF",
+      "desc": "Converti documenti Word in PDF."
+    },
+    "merge": {
+      "title": "Unisci PDF",
+      "desc": "Combina più PDF in uno."
+    },
+    "split": {
+      "title": "Dividi PDF",
+      "desc": "Estrai pagine dal tuo PDF."
+    },
+    "rotate": {
+      "title": "Ruota PDF",
+      "desc": "Ruota le tue pagine PDF."
+    }
+  },
+  "Seo": {
+    "title": "PDFPro - Strumenti PDF Avanzati",
+    "description": "Una suite completa di strumenti per la manipolazione di PDF."
+  }
+}

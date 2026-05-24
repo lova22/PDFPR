@@ -1,0 +1,36 @@
+{
+  "Navbar": {
+    "allTools": "Todas las Herramientas",
+    "github": "GitHub"
+  },
+  "Hero": {
+    "title": "Poderosas Herramientas PDF en tu Navegador",
+    "subtitle": "Edita, convierte, une y divide tus archivos PDF de forma segura sin subir datos a servidores."
+  },
+  "Tools": {
+    "compress": {
+      "title": "Comprimir PDF",
+      "desc": "Reduce el tamaño del archivo manteniendo la calidad."
+    },
+    "wordToPdf": {
+      "title": "Word a PDF",
+      "desc": "Convierte documentos de Word a PDF."
+    },
+    "merge": {
+      "title": "Unir PDF",
+      "desc": "Combina múltiples PDFs en uno solo."
+    },
+    "split": {
+      "title": "Dividir PDF",
+      "desc": "Extrae páginas de tu PDF."
+    },
+    "rotate": {
+      "title": "Rotar PDF",
+      "desc": "Rota tus páginas de PDF."
+    }
+  },
+  "Seo": {
+    "title": "PDFPro - Herramientas PDF Avanzadas",
+    "description": "Un conjunto completo de herramientas de manipulación de PDF."
+  }
+}

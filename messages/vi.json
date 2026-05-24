@@ -1,0 +1,36 @@
+{
+  "Navbar": {
+    "allTools": "Tất Cả Công Cụ",
+    "github": "GitHub"
+  },
+  "Hero": {
+    "title": "Công Cụ PDF Mạnh Mẽ Trên Trình Duyệt Của Bạn",
+    "subtitle": "Chỉnh sửa, chuyển đổi, nối và cắt tệp PDF của bạn một cách an toàn mà không cần tải dữ liệu lên máy chủ."
+  },
+  "Tools": {
+    "compress": {
+      "title": "Nén PDF",
+      "desc": "Giảm kích thước tệp trong khi vẫn giữ chất lượng."
+    },
+    "wordToPdf": {
+      "title": "Word sang PDF",
+      "desc": "Chuyển đổi tài liệu Word sang PDF."
+    },
+    "merge": {
+      "title": "Nối PDF",
+      "desc": "Kết hợp nhiều tệp PDF thành một."
+    },
+    "split": {
+      "title": "Cắt PDF",
+      "desc": "Trích xuất trang từ tệp PDF của bạn."
+    },
+    "rotate": {
+      "title": "Xoay PDF",
+      "desc": "Xoay các trang PDF của bạn."
+    }
+  },
+  "Seo": {
+    "title": "PDFPro - Công Cụ PDF Nâng Cao",
+    "description": "Bộ công cụ thao tác PDF toàn diện."
+  }
+}

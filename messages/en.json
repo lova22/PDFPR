@@ -1,0 +1,36 @@
+{
+  "Navbar": {
+    "allTools": "All Tools",
+    "github": "GitHub"
+  },
+  "Hero": {
+    "title": "Powerful PDF Tools in Your Browser",
+    "subtitle": "Edit, convert, merge, split and process your PDF files securely without uploading data to servers."
+  },
+  "Tools": {
+    "compress": {
+      "title": "Compress PDF",
+      "desc": "Reduce file size while maintaining quality."
+    },
+    "wordToPdf": {
+      "title": "Word to PDF",
+      "desc": "Convert Word documents to PDF."
+    },
+    "merge": {
+      "title": "Merge PDF",
+      "desc": "Combine multiple PDFs into one."
+    },
+    "split": {
+      "title": "Split PDF",
+      "desc": "Extract pages from your PDF."
+    },
+    "rotate": {
+      "title": "Rotate PDF",
+      "desc": "Rotate your PDF pages."
+    }
+  },
+  "Seo": {
+    "title": "PDFPro - Advanced PDF Tools",
+    "description": "A comprehensive suite of PDF manipulation tools."
+  }
+}
