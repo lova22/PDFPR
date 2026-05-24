@@ -315,7 +315,7 @@ export default function EditPdfClient() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                {...getRootProps()}
+                {...(getRootProps() as any)}
                 className={`p-16 border-2 border-dashed m-8 rounded-2xl text-center cursor-pointer transition-all duration-200 ease-in-out ${
                   isDragActive ? "border-pink-500 bg-pink-50" : "border-gray-300 hover:border-pink-400 hover:bg-gray-50"
                 }`}

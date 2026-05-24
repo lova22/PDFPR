@@ -188,7 +188,7 @@ export default function PdfToWordClient() {
                   transition={{ duration: 0.3 }}
                 >
                   <div 
-                    {...getRootProps()} 
+                    {...(getRootProps() as any)} 
                     className={`group relative border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all duration-300 ${
                       isDragActive 
                         ? "border-rose-500 bg-rose-50 scale-[1.02]" 

@@ -140,7 +140,7 @@ export default function ImageToPdfClient() {
           {/* Dropzone (always visible unless completed/error) */}
           {status !== "completed" && status !== "error" && (
             <div
-              {...getRootProps()}
+              {...(getRootProps() as any)}
               className={`mb-8 border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all duration-200 ease-in-out ${
                 isDragActive ? "border-yellow-500 bg-yellow-50" : "border-gray-300 hover:border-yellow-400 hover:bg-gray-50"
               }`}

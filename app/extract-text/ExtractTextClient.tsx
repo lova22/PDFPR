@@ -135,7 +135,7 @@ export default function ExtractTextClient() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                {...getRootProps()}
+                {...(getRootProps() as any)}
                 className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all duration-200 ease-in-out ${
                   isDragActive ? "border-yellow-500 bg-yellow-50" : "border-gray-300 hover:border-yellow-400 hover:bg-gray-50"
                 }`}
