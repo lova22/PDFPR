@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { Image as ImageIcon, Loader2, Download, RefreshCw, CheckCircle2, Trash2, ArrowUp, ArrowDown, Plus } from "lucide-react";
+import { Image as ImageIcon, Loader2, Download, RefreshCw, CheckCircle2, Trash2, ArrowUp, ArrowDown, Plus, AlertCircle } from "lucide-react";
 import { useDropzone } from "react-dropzone";
 import { motion, AnimatePresence } from "framer-motion";
 import { PDFDocument, PageSizes } from "pdf-lib";
