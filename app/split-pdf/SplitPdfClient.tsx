@@ -285,9 +285,9 @@ export default function SplitPdfClient() {
             aria-label="Upload PDF — click or drag and drop"
             onClick={() => inputRef.current?.click()}
             onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") inputRef.current?.click(); }}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
+            onDragOver={handleDragOver as any}
+            onDragLeave={handleDragLeave as any}
+            onDrop={handleDrop as any}
             style={{
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
               gap: "1rem", padding: "4.5rem 2rem", borderRadius: 20, cursor: "pointer",
